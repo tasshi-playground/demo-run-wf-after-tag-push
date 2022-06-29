@@ -1,0 +1,12 @@
+name: Tag pushed
+
+on:
+  push:
+    tags:
+      - "@tag/demo@**"
+
+jobs:
+  when-tag-pushed:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "sucess!!"

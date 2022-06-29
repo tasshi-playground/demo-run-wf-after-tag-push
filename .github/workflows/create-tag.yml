@@ -1,0 +1,17 @@
+name: Push tag
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-tag:
+    name: Create Tag
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "::set-output name=VERSION::$(date '+@tag/demo@%y.%-m.%-d-%H%M%S')"
+        id: version
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ steps.version.outputs.version }}"
+          title: "Tag: ${{ steps.version.outputs.version }}"
